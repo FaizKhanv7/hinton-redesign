@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hinton Youth Entrepreneurship Award" />
+  <title>HintonYEA — Hinton Youth Entrepreneurship Award</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            accent: {
+              DEFAULT: '#77abbf',
+              hover: '#649db3',
+              subtle: '#eaf2f5'
+            },
+            ink: '#1a1a1a',
+            body: '#4a4a4a',
+            muted: '#71717a',
+            border: '#e5e5e5',
+            surface: '#fafafa',
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Reset & Typography defaults matching YC design language */
+    html {
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+    body {
+      background-color: #ffffff;
+      color: #1a1a1a;
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: #77abbf;
+      color: #ffffff;
+    }
+
+    /* Hairline focus styling */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 2px solid #77abbf;
+      outline-offset: 2px;
+    }
+
+    /* Staggered Scroll Entrance Animations */
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 500ms ease-out, transform 500ms ease-out;
+      will-change: opacity, transform;
+    }
+
+    .stagger-group.is-visible .stagger-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-group.is-visible .stagger-item:nth-child(1) { transition-delay: 0ms; }
+    .stagger-group.is-visible .stagger-item:nth-child(2) { transition-delay: 90ms; }
+    .stagger-group.is-visible .stagger-item:nth-child(3) { transition-delay: 180ms; }
+    .stagger-group.is-visible .stagger-item:nth-child(4) { transition-delay: 270ms; }
+    .stagger-group.is-visible .stagger-item:nth-child(5) { transition-delay: 360ms; }
+
+    /* Accessible reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .stagger-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased text-[#1a1a1a] bg-white">
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#e5e5e5]" aria-label="Primary navigation">
+    <div class="mx-auto flex h-16 max-w-[1140px] items-center justify-between px-6 sm:px-8">
+      <a href="#home" class="flex items-center" aria-label="Hinton Youth Entrepreneurship Award home">
+        <img src="Logo.avif" alt="Hinton YEA" class="h-8 sm:h-9 w-auto object-contain" />
+      </a>
+      <button id="menu-button" class="rounded-md p-2 text-[#1a1a1a] hover:bg-[#fafafa] md:hidden" type="button" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="sr-only">Open navigation menu</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="h-6 w-6 fill-none stroke-current stroke-2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="hidden items-center gap-8 text-sm font-medium text-[#4a4a4a] md:flex">
+        <a class="hover:text-[#77abbf] transition-colors" href="#home">Home</a>
+        <a class="hover:text-[#77abbf] transition-colors" href="#competition">Competition / Apply</a>
+        <a class="hover:text-[#77abbf] transition-colors" href="#">Past Winners</a>
+        <a class="hover:text-[#77abbf] transition-colors" href="#curriculum">Curriculum</a>
+        <a class="hover:text-[#77abbf] transition-colors" href="#mentor">Advisors</a>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-[#e5e5e5] bg-white px-6 py-4 md:hidden">
+      <div class="flex flex-col gap-3 text-sm font-medium text-[#4a4a4a]">
+        <a class="hover:text-[#77abbf] py-1 transition-colors" href="#home">Home</a>
+        <a class="hover:text-[#77abbf] py-1 transition-colors" href="#competition">Competition / Apply</a>
+        <a class="hover:text-[#77abbf] py-1 transition-colors" href="#">Past Winners</a>
+        <a class="hover:text-[#77abbf] py-1 transition-colors" href="#curriculum">Curriculum</a>
+        <a class="hover:text-[#77abbf] py-1 transition-colors" href="#mentor">Advisors</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <header id="home" class="stagger-group bg-white pt-16 pb-24 sm:pt-24 sm:pb-28 lg:pt-32 lg:pb-32 border-b border-[#e5e5e5]">
+      <div class="mx-auto max-w-[1140px] px-6 sm:px-8">
+        <div class="max-w-4xl text-left">
+          <p class="stagger-item text-xs font-bold uppercase tracking-[0.18em] text-[#77abbf] mb-4 sm:mb-6">Hinton Youth Entrepreneurship Award</p>
+          <h1 class="stagger-item text-4xl sm:text-6xl lg:text-[68px] font-bold leading-[1.06] tracking-[-0.035em] text-[#1a1a1a]">What does it mean to be an entrepreneur?</h1>
+          <p class="stagger-item mt-6 sm:mt-8 max-w-[68ch] text-base sm:text-lg leading-relaxed text-[#4a4a4a]">Let me put it this way: If you like learning new things, taking risks, and mastering the process of turning your ideas into profitable businesses, then you could definitely call yourself an entrepreneur. It's all about creating something from nothing and having the drive and motivation to see it through. Being an entrepreneur isn't just having a cool idea, but building on that idea to develop a business people will want or need. In short, if you have what it takes to succeed in business and be responsible for your own enterprises, then congratulations – you're an entrepreneur!</p>
+          <div class="stagger-item mt-8 sm:mt-10">
+            <a href="#curriculum" class="inline-flex items-center justify-center gap-2 rounded-md bg-[#77abbf] px-6 py-3 text-sm font-semibold text-[#1a1a1a] hover:bg-[#649db3] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#77abbf]">Learn More <span class="text-base" aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Meet your mentor -->
+    <section id="mentor" class="stagger-group bg-[#fafafa] py-16 sm:py-24 lg:py-32 border-b border-[#e5e5e5]" aria-labelledby="mentor-heading">
+      <div class="mx-auto max-w-[1140px] px-6 sm:px-8">
+        <div class="grid grid-cols-1 gap-10 lg:grid-cols-[300px_1fr] lg:gap-16 items-start">
+          <div class="stagger-item">
+            <div class="overflow-hidden rounded-xl border border-[#e5e5e5] bg-white shadow-sm w-full max-w-[280px] sm:max-w-[300px] aspect-[3/4]">
+              <img src="Hinton.avif" alt="Jonathan Hinton" class="h-full w-full object-cover object-top" loading="lazy" />
+            </div>
+          </div>
+          <div class="stagger-item max-w-[68ch] text-left">
+            <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#77abbf]">Meet your mentor</p>
+            <h2 id="mentor-heading" class="mt-3 text-2xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#1a1a1a]">Jonathan Hinton</h2>
+            <p class="mt-4 sm:mt-6 text-base sm:text-lg leading-relaxed text-[#4a4a4a]">When I was in fifth grade, I found myself in the principal's office for running a 'money box' enterprise out of my desk. Every morning, I would take money from my lunch allowance and invest it in supplies from the school bookstore - things like pencils with logos of my favorite baseball team printed on them. I would then resell these items throughout the day to make a profit. This entrepreneurial streak continued into middle school, where I earned pocket money by trading comic books with classmates at the gym before classes began. ...</p>
+            <div class="mt-6 sm:mt-8">
+              <a href="#" class="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1a1a1a] hover:text-[#77abbf] transition-colors">Read More <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Curriculum -->
+    <section id="curriculum" class="stagger-group bg-white py-16 sm:py-24 lg:py-32 border-b border-[#e5e5e5]" aria-labelledby="curriculum-heading">
+      <div class="mx-auto max-w-[1140px] px-6 sm:px-8">
+        <div class="stagger-item max-w-2xl text-left">
+          <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#77abbf]">Curriculum</p>
+          <h2 id="curriculum-heading" class="mt-3 text-2xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#1a1a1a]">What we teach High school entrepreneurs</h2>
+        </div>
+        <div class="stagger-item mt-10 sm:mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3">
+          <!-- Card 01 -->
+          <article class="flex flex-col justify-between rounded-lg border border-[#e5e5e5] bg-[#fafafa] p-6 sm:p-8 hover:border-[#77abbf]/60 transition-colors h-full">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#77abbf]">01</p>
+              <h3 class="mt-4 text-xl font-bold tracking-tight text-[#1a1a1a]">Testing Your Idea</h3>
+              <ul class="mt-6 space-y-3 border-t border-[#e5e5e5] pt-6 text-sm leading-6 text-[#4a4a4a]">
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>What kind of market do you have?</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Who's Your Target Customer?</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>How will you acquire the customer?</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>How big is the opportunity (TAM)?</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Sizing Your Competition</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 02 -->
+          <article class="flex flex-col justify-between rounded-lg border border-[#e5e5e5] bg-[#fafafa] p-6 sm:p-8 hover:border-[#77abbf]/60 transition-colors h-full">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#77abbf]">02</p>
+              <h3 class="mt-4 text-xl font-bold tracking-tight text-[#1a1a1a]">Money Matters</h3>
+              <ul class="mt-6 space-y-3 border-t border-[#e5e5e5] pt-6 text-sm leading-6 text-[#4a4a4a]">
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Estimating Capital Costs</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>How can you raise capital?</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>What about profits? Basics of a P&amp;L</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Deep Dive into Unit Economics</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>How to Scale for Growth</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Card 03 -->
+          <article class="flex flex-col justify-between rounded-lg border border-[#e5e5e5] bg-[#fafafa] p-6 sm:p-8 hover:border-[#77abbf]/60 transition-colors h-full">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#77abbf]">03</p>
+              <h3 class="mt-4 text-xl font-bold tracking-tight text-[#1a1a1a]">Nuts and Bolts of Getting Going</h3>
+              <ul class="mt-6 space-y-3 border-t border-[#e5e5e5] pt-6 text-sm leading-6 text-[#4a4a4a]">
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Incorporation and Entities Overview</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Bank Accounts - the dos and don'ts of comingling funds</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Insurance - why it's needed and common policies</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Accounting Systems</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[#77abbf]" aria-hidden="true"></span>
+                  <span>Taxes - various types, who pays &amp; why?</span>
+                </li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Competition / Award -->
+    <section id="competition" class="stagger-group bg-[#fafafa] py-16 sm:py-24 lg:py-32 border-b border-[#e5e5e5]" aria-labelledby="competition-heading">
+      <div class="mx-auto max-w-[1140px] px-6 sm:px-8">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-[300px_1fr] lg:gap-16 items-start">
+          <div class="stagger-item text-left">
+            <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#77abbf]">Annual competition</p>
+            <div class="mt-4">
+              <p id="prize-counter" class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#77abbf]" aria-label="$10,000">$0</p>
+              <div class="mt-4 h-0.5 w-12 bg-[#77abbf]"></div>
+            </div>
+          </div>
+          <div class="stagger-item max-w-[68ch] text-left">
+            <p class="text-base sm:text-lg leading-relaxed text-[#4a4a4a]">We wrap up the teaching with nuggets of wisdom and inspirational stories from other guest speakers who have built large companies. We finish our teaching with an annual competition.</p>
+            <h2 id="competition-heading" class="mt-6 text-2xl sm:text-3xl lg:text-[38px] font-bold leading-tight tracking-tight text-[#1a1a1a]">
+              The Hinton Youth Entrepreneurship Award is a <span class="border-b-2 border-[#77abbf] pb-0.5">$10,000 dollar cash prize</span> given to the high school entrepreneur with the best business!
+            </h2>
+            <div class="mt-8 sm:mt-10">
+              <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-md bg-[#77abbf] px-6 py-3 text-sm font-semibold text-[#1a1a1a] hover:bg-[#649db3] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#77abbf]">Apply Now <span class="text-base" aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="stagger-group bg-white py-16 sm:py-24 lg:py-32 border-b border-[#e5e5e5]" aria-labelledby="contact-heading">
+      <div class="mx-auto max-w-[1140px] px-6 sm:px-8">
+        <div class="grid grid-cols-1 gap-12 lg:grid-cols-[300px_1fr] lg:gap-16 items-start">
+          <div class="stagger-item text-left">
+            <p class="text-xs font-bold uppercase tracking-[0.18em] text-[#77abbf]">Get in touch</p>
+            <h2 id="contact-heading" class="mt-3 text-2xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-[#1a1a1a]">Contact</h2>
+            <a class="mt-4 inline-block text-base text-[#4a4a4a] hover:text-[#77abbf] transition-colors underline decoration-[#e5e5e5] hover:decoration-[#77abbf] underline-offset-4" href="mailto:support@hintonyea.com">support@hintonyea.com</a>
+          </div>
+          <!-- Form fields are explicitly excluded from scroll entrance animations per prompt -->
+          <div class="w-full max-w-[640px]">
+            <form id="contact-form" class="space-y-6" novalidate>
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div>
+                  <label for="first-name" class="block text-sm font-medium text-[#1a1a1a]">First name</label>
+                  <input required id="first-name" name="first-name" type="text" autocomplete="given-name" class="mt-2 block w-full rounded-md border border-[#e5e5e5] bg-white px-3.5 py-2.5 text-base text-[#1a1a1a] placeholder:text-[#a1a1aa] shadow-none outline-none transition focus:border-[#77abbf] focus:ring-1 focus:ring-[#77abbf]" />
+                </div>
+                <div>
+                  <label for="last-name" class="block text-sm font-medium text-[#1a1a1a]">Last name</label>
+                  <input required id="last-name" name="last-name" type="text" autocomplete="family-name" class="mt-2 block w-full rounded-md border border-[#e5e5e5] bg-white px-3.5 py-2.5 text-base text-[#1a1a1a] placeholder:text-[#a1a1aa] shadow-none outline-none transition focus:border-[#77abbf] focus:ring-1 focus:ring-[#77abbf]" />
+                </div>
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-[#1a1a1a]">Email</label>
+                <input required id="email" name="email" type="email" autocomplete="email" class="mt-2 block w-full rounded-md border border-[#e5e5e5] bg-white px-3.5 py-2.5 text-base text-[#1a1a1a] placeholder:text-[#a1a1aa] shadow-none outline-none transition focus:border-[#77abbf] focus:ring-1 focus:ring-[#77abbf]" />
+              </div>
+              <div>
+                <label for="message" class="block text-sm font-medium text-[#1a1a1a]">Write a message</label>
+                <textarea required id="message" name="message" rows="5" class="mt-2 block w-full resize-y rounded-md border border-[#e5e5e5] bg-white px-3.5 py-2.5 text-base text-[#1a1a1a] placeholder:text-[#a1a1aa] shadow-none outline-none transition focus:border-[#77abbf] focus:ring-1 focus:ring-[#77abbf]"></textarea>
+              </div>
+              <div class="flex flex-wrap items-center gap-4 pt-2">
+                <button class="inline-flex items-center justify-center rounded-md bg-[#77abbf] px-6 py-3 text-sm font-semibold text-[#1a1a1a] hover:bg-[#649db3] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#77abbf]" type="submit">Submit</button>
+                <p id="form-success" class="hidden text-sm font-medium text-[#1a1a1a] bg-[#77abbf]/20 border border-[#77abbf]/50 rounded-md px-3.5 py-2" role="status" aria-live="polite">Thanks for submitting!</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white py-8 border-t border-[#e5e5e5]">
+    <div class="mx-auto flex max-w-[1140px] items-center justify-between px-6 sm:px-8 text-sm text-[#71717a]">
+      <span>© 2025 Hinton YEA</span>
+      <a href="#home" class="font-medium text-[#1a1a1a] hover:text-[#77abbf] transition-colors">Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    // Navigation state & mobile menu
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      mobileMenu.classList.toggle('hidden', isOpen);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Staggered scroll animations using IntersectionObserver
+    const staggerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -20px 0px'
+    });
+
+    document.querySelectorAll('.stagger-group').forEach(el => staggerObserver.observe(el));
+
+    // Immediately trigger visible state for elements already in or near viewport at load time
+    const initVisibility = () => {
+      document.querySelectorAll('.stagger-group').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('is-visible');
+          staggerObserver.unobserve(el);
+        }
+      });
+    };
+    initVisibility();
+    window.addEventListener('load', initVisibility);
+
+    // Prize counter count-up animation on scroll
+    const prize = document.getElementById('prize-counter');
+    let prizeAnimated = false;
+    const prizeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || prizeAnimated) return;
+        prizeAnimated = true;
+        const start = performance.now();
+        const duration = 1000;
+        const target = 10000;
+        const tick = now => {
+          const progress = Math.min((now - start) / duration, 1);
+          // ease-out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          prize.textContent = '$' + Math.round(target * eased).toLocaleString();
+          if (progress < 1) {
+            requestAnimationFrame(tick);
+          } else {
+            prize.textContent = '$10,000';
+          }
+        };
+        requestAnimationFrame(tick);
+        prizeObserver.unobserve(prize);
+      });
+    }, { threshold: 0.2 });
+
+    if (prize) prizeObserver.observe(prize);
+
+    // Form submission handling
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    if (contactForm) {
+      contactForm.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!contactForm.checkValidity()) {
+          contactForm.reportValidity();
+          return;
+        }
+        formSuccess.classList.remove('hidden');
+        contactForm.reset();
+      });
+    }
+  </script>
+</body>
+</html>
